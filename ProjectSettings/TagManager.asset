@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 3
+  tags:
+  - Enemy
+  - Monster
+  - Water
+  - TrueWater
+  - MainMap
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Player
+  - Water
+  - UI
+  - Enemy
+  - BG
+  - Sides
+  - Egg
+  - Monster
+  - TrueWater
+  - MainMap
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: BG
+    uniqueID: 2616713525
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Character
+    uniqueID: 1162689019
+    locked: 0
+  - name: Map
+    uniqueID: 1730750549
+    locked: 0
+  - name: Water
+    uniqueID: 3138547287
+    locked: 0
+  m_RenderingLayers:
+  - Default
