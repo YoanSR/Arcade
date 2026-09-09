@@ -4,7 +4,6 @@ using Random = UnityEngine.Random;
 
 public class EnemyTestSuperior : MonoBehaviour
 {
-    
     [HideInInspector] public Animator _animator;
     [HideInInspector] public BoxCollider2D _collider;
     [HideInInspector] public Rigidbody2D _rb;

@@ -15,6 +15,7 @@ public class Enemy : EnemyTestSuperior
         
         FirstMovement();
         StartCoroutine(Jump());
+        
     }
     
     private IEnumerator Jump()

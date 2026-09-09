@@ -8966,7 +8966,7 @@ MonoBehaviour:
   _text: {fileID: 279191209}
   spawnPos2: {fileID: 475780723}
   spawnPos3: {fileID: 132200967}
-  _birdSpawn: {fileID: 499203338}
+  _birdSpawn: {fileID: 1574765684}
   SquidSpawn: {fileID: 1068387708}
   _destroyTilemap: {fileID: 932753785}
   _lastRoundText: {fileID: 584551108}
@@ -24783,6 +24783,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1835047471}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1574765683
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1574765684}
+  m_Layer: 0
+  m_Name: Pterodactylspawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1574765684
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1574765683}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -9, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1576656967
 GameObject:
   m_ObjectHideFlags: 0
@@ -27797,6 +27828,7 @@ SceneRoots:
   - {fileID: 1522083544}
   - {fileID: 1313344262}
   - {fileID: 1472667188}
+  - {fileID: 1574765684}
   - {fileID: 671796930}
   - {fileID: 1029195635072810247}
   - {fileID: 1849987095}
