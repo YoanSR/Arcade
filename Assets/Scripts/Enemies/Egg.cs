@@ -6,17 +6,15 @@ using UnityEngine;
 public class Egg : MonoBehaviour
 {
     [SerializeField] private float _eggTimer;
-    
     [SerializeField] private LayerMask _playerMask;
-        
-    private GameObject _scoreGameObject;
     
+    private bool _coroutine;
+    private int _scoreAdded;
+    private GameObject _scoreGameObject;
     [SerializeField] private int _scoreNumberAdd;
-    private int scoreAdded;
-    private bool coroutine;
     [SerializeField] private GameObject _RedPenguin;
     
-    private bool oneTime;
+    private bool _oneTime;
 
     private void Start()
     {
@@ -32,29 +30,12 @@ public class Egg : MonoBehaviour
             Debug.Log("add points");
                  
             _scoreGameObject = GameObject.Find("Score");
-                 
-            _scoreGameObject.GetComponent<Score>()._scoreNumber += _scoreNumberAdd;
-            //StartCoroutine(Points());   
+            _scoreGameObject.GetComponent<Score>().ScoreNumber += _scoreNumberAdd;
+
             Destroy(gameObject);
         }
         
     }
-
-    private IEnumerator Points()
-    {
-        
-        /*while (scoreAdded < _scoreNumberAdd)
-        {
-            Debug.Log(scoreAdded);
-            Debug.Log(_scoreNumberAdd);
-            scoreAdded++;
-            _scoreGameObject.GetComponent<Score>()._scoreNumber++;
-            yield return new WaitForSeconds(0.1f);
-        }*/
-
-        yield return new WaitForSeconds(1);
-    }
-    
 
     private IEnumerator Break()
     {

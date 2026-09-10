@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class Enemy2 : EnemyTestSuperior
+public class BluePenguin : Penguins
 {
     private int _jumpChance;
     
@@ -24,12 +24,12 @@ public class Enemy2 : EnemyTestSuperior
             _jumpChance = Random.Range(0, 3);
 
             if (_jumpChance >= 2)
-                _rb.AddForce(_jumpStrength * Vector2.up);
+                _rb.AddForce(JumpStrength * Vector2.up);
             
             _jumpChance = Random.Range(0, 3);
             
             if (_jumpChance == 3)
-                _rb.AddForce(_jumpStrength * Vector2.up);
+                _rb.AddForce(JumpStrength * Vector2.up);
             
             yield return new WaitForSeconds(0.15f);
         }
@@ -41,6 +41,6 @@ public class Enemy2 : EnemyTestSuperior
         Animation();
         //Flip();
         
-        _rb.linearVelocityX = _speed;
+        _rb.linearVelocityX = Speed;
     }
 }

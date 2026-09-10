@@ -1,30 +1,27 @@
-using System;
 using System.Collections;
-using DG.Tweening;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
 
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D _rb;
     private Animator _animator;
     
-    private bool facingRight = true;
+    private bool _facingRight = true;
     
     [SerializeField] private float _maxSpeed;
     [SerializeField] private float _acceleration;
     [SerializeField] private float _deceleration;
     [SerializeField] private float _Jumpstrength;
     private Vector2 _moveVector;
-    private bool SpacePressed;
-    private bool JumpRoutine;
-    private bool activeJumpTimer;
-    private float jumpTimer;
     
+    private bool _grounded;
     
-    private Collider2D aa;
+    private bool _spacePressed;
+    private bool _jumpRoutine;
+    private bool _activeJumpTimer;
+    private float _jumpTimer;
+    
     [SerializeField] private ParticleSystem _flipParticles;
     [SerializeField] private ParticleSystem _bonkParticles;
 
@@ -35,7 +32,6 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private Settings _echapSettings;
     
-    private bool _grounded;
     [SerializeField] private Transform _groundCheck;
     [SerializeField] private LayerMask _groundLayer;
 
@@ -47,11 +43,11 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!JumpRoutine && jumpTimer >= 0.1f)
+        if (!_jumpRoutine && _jumpTimer >= 0.1f)
         {
             //Debug.Log("Jump");
             StartCoroutine(Jump());
-            JumpRoutine = true;
+            _jumpRoutine = true;
         }
         
         //Debug.Log(SpacePressed);
@@ -62,8 +58,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-     if (activeJumpTimer == true)   
-        jumpTimer += Time.deltaTime;
+     if (_activeJumpTimer == true)   
+        _jumpTimer += Time.deltaTime;
      
      //Debug.Log(_rb.linearVelocity.y);
      if (_rb.linearVelocity.y > 5)
@@ -72,14 +68,14 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator Jump()
     {
-        while (SpacePressed)
+        while (_spacePressed)
         {
-            if (SpacePressed == false)
+            if (_spacePressed == false)
                 break;
             
             yield return new WaitForSeconds(0.15f);
             
-            if (SpacePressed == false)
+            if (_spacePressed == false)
                 break;
                 
             _source.PlayOneShot(_flyAudio, 0.25f);
@@ -126,20 +122,20 @@ public class PlayerController : MonoBehaviour
 
     private void OnJump(InputValue value)
     {
-        SpacePressed = value.isPressed;
+        _spacePressed = value.isPressed;
 
-        if (SpacePressed == true)
+        if (_spacePressed == true)
         {
-            activeJumpTimer = true;
+            _activeJumpTimer = true;
         }
         else
         { 
-            activeJumpTimer = false;
-            jumpTimer = 0;
+            _activeJumpTimer = false;
+            _jumpTimer = 0;
         }
            
         
-        if (SpacePressed == true)
+        if (_spacePressed == true)
         {
             _animator.SetTrigger("Fly");
             _rb.AddForce(_Jumpstrength * Vector2.up);
@@ -148,7 +144,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             StopCoroutine(Jump());
-            JumpRoutine = false;
+            _jumpRoutine = false;
         }
     }
 
@@ -172,12 +168,12 @@ public class PlayerController : MonoBehaviour
 
     private void Flip()
     {
-        if  (facingRight && _moveVector.x < 0 || !facingRight && _moveVector.x > 0)
+        if  (_facingRight && _moveVector.x < 0 || !_facingRight && _moveVector.x > 0)
         {
             var localScale = transform.localScale;
             localScale.x *= -1;
             transform.localScale = localScale;
-            facingRight = !facingRight;
+            _facingRight = !_facingRight;
 
             if (IsGrounded())
             {

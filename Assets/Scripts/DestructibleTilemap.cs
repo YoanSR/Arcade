@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -7,8 +6,6 @@ using UnityEngine.Tilemaps;
 public class DestructibleTilemap : MonoBehaviour
 {
     [SerializeField] private Tilemap _dt;
-    
-    [SerializeField] private new List<BoundsInt.PositionEnumerator> _tile = new();
     
     [SerializeField] private RuleTile _breakingAnimation;
     [SerializeField] private RuleTile _breakingAnimation2;
@@ -24,24 +21,6 @@ public class DestructibleTilemap : MonoBehaviour
         StartCoroutine(DestroyRoutine());
         
         _seq = DOTween.Sequence();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //_dt.SetTile(_dt.WorldToCell(transform.position), null);
-
-        //var caca = _dt.WorldToCell(transform.position);
-            //Debug.Log(caca);
-
-
-
-        //foreach (Vector3Int position in _dt.cellBounds.allPositionsWithin)
-        //{
-          //  Debug.Log(position);
-        //}
-        
-
     }
 
     private IEnumerator DestroyRoutine()
@@ -63,8 +42,6 @@ public class DestructibleTilemap : MonoBehaviour
             aa = i * -1 - 1;
 
             //Debug.Log(i);
-            //gameObject.GetComponent<CompositeCollider2D>().collid;
-            
             
             _dt.SetTile(_dt.WorldToCell(new Vector3(i, -5, 0)), _breakingAnimation);
             _dt.SetTile(_dt.WorldToCell(new Vector3(aa, -5, 0)), _breakingAnimation2);
@@ -74,60 +51,5 @@ public class DestructibleTilemap : MonoBehaviour
             _dt.SetTile(_dt.WorldToCell(new Vector3(i, -5, 0)), null);
             _dt.SetTile(_dt.WorldToCell(new Vector3(aa, -5, 0)), null);
         }
-
-        
-        
-        
-        //_dt.CompressBounds();
-        /*foreach (Vector3Int position in _dt.cellBounds.allPositionsWithin)
-        {
-            var aa = _dt.GetTile(position);
-            Debug.Log(position);
-            
-            
-            
-            _dt.SetTile(_dt.WorldToCell(new Vector3(-10, -5, 0)), _breakingAnimation);
-               
-            yield return new WaitForSeconds(7);
-            _dt.SetTile(_dt.WorldToCell(new Vector3(-10, -5, 0)), null);
-            _dt.SetTile(_dt.WorldToCell(new Vector3(9, -5, 0)), null);
-            
-            _dt.SetTile(_dt.WorldToCell(new Vector3(-9, -5, 0)), _breakingAnimation);
-            yield return new WaitForSeconds(7);
-            
-            _dt.SetTile(_dt.WorldToCell(new Vector3(-9, -5, 0)), null);
-            _dt.SetTile(_dt.WorldToCell(new Vector3(8, -5, 0)), null);
-            
-            _dt.SetTile(_dt.WorldToCell(new Vector3(-8, -5, 0)), _breakingAnimation);
-            yield return new WaitForSeconds(7);
-            
-            _dt.SetTile(_dt.WorldToCell(new Vector3(-8, -5, 0)), null);
-            _dt.SetTile(_dt.WorldToCell(new Vector3(7, -5, 0)), null);
-            
-            _dt.SetTile(_dt.WorldToCell(new Vector3(-7, -5, 0)), _breakingAnimation);
-            yield return new WaitForSeconds(7);
-            
-            _dt.SetTile(_dt.WorldToCell(new Vector3(-7, -5, 0)), null);
-            _dt.SetTile(_dt.WorldToCell(new Vector3(6, -5, 0)), null);
-            
-            _dt.SetTile(_dt.WorldToCell(new Vector3(-6, -5, 0)), _breakingAnimation);
-            yield return new WaitForSeconds(7);
-            
-            _dt.SetTile(_dt.WorldToCell(new Vector3(-6, -5, 0)), null);
-            _dt.SetTile(_dt.WorldToCell(new Vector3(5, -5, 0)), null);
-            
-            //_dt.SetTile(_dt.WorldToCell(new Vector3(-5, -5, 0)), _breakingAnimation);
-            yield return new WaitForSeconds(4);
-            //_dt.SetTile(_dt.WorldToCell(position), null);
-            
-        }
-        
-        //_dt.SetTile(_dt.WorldToCell(), null);
-        //dt.SetTile(_dt.cell);
-        yield return new WaitForSeconds(1);*/
     }
-
-    
-
-
 }

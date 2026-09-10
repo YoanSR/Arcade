@@ -1,18 +1,15 @@
 
 using UnityEngine;
 
-public class Monster2 : MonoBehaviour
+public class Squid : MonoBehaviour
 {
     private Collider2D _collider;
-
+    private SquidSpawner _squidSpawner;
+    
     [SerializeField] private GameObject _monsterSpawning;
     [SerializeField] private GameObject _front;
 
-    public GameObject _otherGameObject;
-
-
-    private Monster _monster;
-    
+    public GameObject OtherGameObject;
     private GameObject _monsterSpawn;
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -20,11 +17,10 @@ public class Monster2 : MonoBehaviour
         if (other.tag != "Monster" )
         {
              Debug.Log(other.gameObject.name);
-             _otherGameObject = other.gameObject;
+             OtherGameObject = other.gameObject;
             _monsterSpawn = Instantiate(_monsterSpawning, other.transform);
             //_monsterSpawn = Instantiate(_monsterSpawning, other.transform.position - new Vector3(0, 2), Quaternion.identity);
-            _monsterSpawn.GetComponent<Monster>()._invocator = _otherGameObject;
-            
+            _monsterSpawn.GetComponent<SquidSpawner>().Invocator = OtherGameObject;
         }
        
         //test

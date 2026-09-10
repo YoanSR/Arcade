@@ -7806,7 +7806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b74195bb25a34641864d16167f75cc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  sidePos: {fileID: 1576656967}
+  _sidePos: {fileID: 1576656967}
 --- !u!61 &429876933
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8290,11 +8290,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1951932733}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &500434303 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1865823297541909699, guid: 61168fd3186231245975eff2aca31da4, type: 3}
-  m_PrefabInstance: {fileID: 6823597168416360879}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &511508832
 GameObject:
   m_ObjectHideFlags: 0
@@ -8387,7 +8382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b74195bb25a34641864d16167f75cc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Side
-  sidePos: {fileID: 499203337}
+  _sidePos: {fileID: 499203337}
 --- !u!50 &511508836
 Rigidbody2D:
   serializedVersion: 5
@@ -19277,9 +19272,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab31aed9e02a50149b8e747c7534cb54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  _scoreNumber: 0
+  ScoreNumber: 0
   _totalScoreNumber: 0
-  _Player: {fileID: 500434303}
+  _player: {fileID: 0}
 --- !u!1 &1459521742
 GameObject:
   m_ObjectHideFlags: 0

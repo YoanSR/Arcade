@@ -2,22 +2,22 @@ using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class EnemyTestSuperior : MonoBehaviour
+public class Penguins : MonoBehaviour
 {
     [HideInInspector] public Animator _animator;
     [HideInInspector] public BoxCollider2D _collider;
     [HideInInspector] public Rigidbody2D _rb;
     [HideInInspector] public SpriteRenderer _sr;
     
-    public Transform target;
+    public Transform Target;
     
     [SerializeField] private Transform _side;
     [SerializeField] private Vector2 _sideRadius;
     
     [SerializeField] private LayerMask _otherLayer;
     
-    public float _speed;
-    public float _jumpStrength;
+    public float Speed;
+    public float JumpStrength;
     
     public bool Death;
     private float _deathTimer;
@@ -34,19 +34,20 @@ public class EnemyTestSuperior : MonoBehaviour
     [SerializeField] private GameObject Egg;
     private bool _eggInvoked;
     
-    private GameObject _scoreGameObject;
     [SerializeField] private int _scoreNumberAdd;
+    private GameObject _scoreGameObject;
     private int scoreAdded = 0;
-
+    
     public void FirstMovement()
     {
+        _rb.linearVelocityX = Speed;
         int _firstMovement = 9;
         _firstMovement = Random.Range(1,2);
         
         Debug.Log(_firstMovement);
         
         if (_firstMovement == 1)
-            _rb.linearVelocityX  = _speed * -1;
+            _rb.linearVelocityX  = Speed * -1;
     }
 
     public void Damage()
@@ -55,7 +56,7 @@ public class EnemyTestSuperior : MonoBehaviour
         for (int i = 0; i < Damaged.Length; i++)
             if (Damaged[i].GetComponent<Collider2D>() != _collider && Damaged[i].tag != "Monster" && Damaged[i].tag != "Water")
             {
-                _speed *= -1f ;
+                Speed *= -1f ;
                 var localScale = transform.localScale;
                 localScale.x *= -1;
                 transform.localScale = localScale;
@@ -90,7 +91,7 @@ public class EnemyTestSuperior : MonoBehaviour
         while (scoreAdded < _scoreNumberAdd)
         {
             scoreAdded++;
-            _scoreGameObject.GetComponent<Score>()._scoreNumber++;
+            _scoreGameObject.GetComponent<Score>().ScoreNumber++;
             yield return new WaitForSeconds(0.1f);
         }
         

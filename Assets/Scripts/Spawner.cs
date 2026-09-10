@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -8,8 +7,7 @@ using Random = UnityEngine.Random;
 
 public class Spawner : MonoBehaviour
 {
-    private List<GameObject> _enemiesRemaining =  new List<GameObject>();
-    
+    private Sequence _seq;
     private LayerMask _enemyMask;
     
     [SerializeField] private GameObject _bluePenguin;
@@ -18,12 +16,9 @@ public class Spawner : MonoBehaviour
     
     [SerializeField] private List<GameObject> _birdlist = new List<GameObject>();
     
-
-    private int _waves = 1;
-    
-    private Sequence _seq;
     [SerializeField] private TextMeshProUGUI _text;
 
+    private int _waves = 1;
     [SerializeField] private Transform spawnPos2;
     [SerializeField] private Transform spawnPos3;
     

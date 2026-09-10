@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class Enemy : EnemyTestSuperior
+public class RedPenguin : Penguins
 {
     private int _jumpChance;
     
@@ -24,26 +24,26 @@ public class Enemy : EnemyTestSuperior
         {
             _jumpChance = Random.Range(0, 3);
 
-            if (transform.position.x - target.position.x < 3 && transform.position.x - target.position.x > -3 &&
-                transform.position.y - target.position.y < 0 && transform.position.y - target.position.y > -5)
+            if (transform.position.x - Target.position.x < 3 && transform.position.x - Target.position.x > -3 &&
+                transform.position.y - Target.position.y < 0 && transform.position.y - Target.position.y > -5)
             {
-                _rb.AddForce(_jumpStrength * Vector2.up);
+                _rb.AddForce(JumpStrength * Vector2.up);
                 //Debug.Log(transform.position.y - target.position.y);
             }
             
-            if (!(transform.position.x - target.position.x < 3 && transform.position.x - target.position.x > -3 &&
-                transform.position.y - target.position.y < 5 && transform.position.y - target.position.y > 0))
+            if (!(transform.position.x - Target.position.x < 3 && transform.position.x - Target.position.x > -3 &&
+                transform.position.y - Target.position.y < 5 && transform.position.y - Target.position.y > 0))
             {
                 //Debug.Log("caca");
                 _jumpChance = Random.Range(0, 3);
                 
                 if (_jumpChance >= 2)
-                    _rb.AddForce(_jumpStrength * Vector2.up);
+                    _rb.AddForce(JumpStrength * Vector2.up);
             
                 _jumpChance = Random.Range(0, 3);
             
                 if (_jumpChance == 3)
-                    _rb.AddForce(_jumpStrength * Vector2.up);
+                    _rb.AddForce(JumpStrength * Vector2.up);
             }
             
             yield return new WaitForSeconds(0.15f);
@@ -56,7 +56,7 @@ public class Enemy : EnemyTestSuperior
         Animation();
         //Flip();
         
-        _rb.linearVelocityX = _speed;
+        _rb.linearVelocityX = Speed;
         if (_rb.linearVelocity.y > 5)
             _rb.linearVelocityY = 5;
     }

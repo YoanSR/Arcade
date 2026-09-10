@@ -1,26 +1,22 @@
-using System;
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 using UnityEngine.SceneManagement;
-using Object = System.Object;
-
 
 public class Logo : MonoBehaviour
 {
     private Sequence seq;
     
-    [SerializeField] private RectTransform _bannerRectTransform;
-
     private bool isLogoNewPos;
     private bool _firstMenu = true;
     
-    [SerializeField] private Transform _transition;
 
+    [SerializeField] private Transform _transition;
+    
     [SerializeField] private string _scenename;
 
+    [SerializeField] private RectTransform _bannerRectTransform;
     [SerializeField] private Vector2 _bannerNewPos;
     [SerializeField] private Vector2 _logoNewPos;
     
@@ -33,9 +29,6 @@ public class Logo : MonoBehaviour
     
     [SerializeField] private Transform _bestScore;
     
-    
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         seq = DOTween.Sequence();
@@ -90,5 +83,13 @@ public class Logo : MonoBehaviour
         //SceneManager.LoadScene(_scenename);
         seq.Append(_transition.DOScale(50, 1f).SetEase(Ease.InCubic).OnComplete(() => { SceneManager.LoadScene(_scenename);}));
         seq.Append(_transition.DORotate(new Vector3(0, 0, -360), 1f, RotateMode.FastBeyond360).SetEase(Ease.InCubic));
+    }
+
+    public void Quit()
+    {
+        
+        seq.Append(_transition.DOScale(50, 1.5f).SetEase(Ease.InCubic).OnComplete(() => { Application.Quit(); Debug.Log("Game is exiting");})).SetDelay(0.5f);
+        
+        
     }
 }

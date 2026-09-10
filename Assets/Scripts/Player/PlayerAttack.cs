@@ -1,38 +1,34 @@
-using System;
 using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
-using UnityEngine.UIElements;
 using Image = UnityEngine.UI.Image;
 
 public class PlayerAttack : MonoBehaviour
 {
+    private Sequence _seq;
+    private Rigidbody2D _rb;
+    
     [SerializeField] private Transform _attackPos;
     [SerializeField] private Vector2 _attackRadius;
     [SerializeField] private Transform _damagedPos;
     [SerializeField] private Vector2 _damagedRadius;
     [SerializeField] private LayerMask _EnemyLayer;
     
-    public int _deathNumber;
-    
-    private Rigidbody2D _rb;
-    [SerializeField] private float _kbStrength;
     [SerializeField] private ParticleSystem _killEffect;
     [SerializeField] private AudioClip _deathSound;
-
     [SerializeField] private RectTransform _healthImage;
-
-    private Sequence _seq;
-
-    public bool IsDying;
-    [SerializeField] private Image _BG;
+    [SerializeField] private float _kbStrength;
+    
+    [SerializeField] private Image _bg;
     [SerializeField] private GameObject _deathMenu;
 
+    public int DeathNumber;
+    public bool IsDying;
+    
     private void Awake()
     {
         _rb  = GetComponent<Rigidbody2D>();
-        
         _seq = DOTween.Sequence();
     }
 
@@ -45,7 +41,7 @@ public class PlayerAttack : MonoBehaviour
         
         IsDying = true;
         Debug.Log("death");
-        _deathNumber++ ;
+        DeathNumber++ ;
         
         _rb.isKinematic = true;
         _rb.gravityScale = 0;
@@ -54,7 +50,7 @@ public class PlayerAttack : MonoBehaviour
         
         yield return new WaitForSeconds(1f);
         
-        if (_deathNumber >= 4)
+        if (DeathNumber >= 4)
         {
             _rb.linearVelocity = Vector2.zero;
             _rb.isKinematic = true;
@@ -62,13 +58,13 @@ public class PlayerAttack : MonoBehaviour
             gameObject.GetComponent<Collider2D>().enabled = false;
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
             
-            _BG.DOFade(0.4f, 0.5f);
+            _bg.DOFade(0.4f, 0.5f);
             _deathMenu.SetActive(true);
             _seq.Append(_deathMenu.transform.DOScaleY(1, 0.5f)).SetEase(Ease.InCubic);
             _seq.Append(_deathMenu.transform.DOScaleX(1, 0.25f)).SetEase(Ease.InCubic);
 
-            if (GameObject.Find("Score").GetComponent<Score>()._scoreNumber < PlayerPrefs.GetInt("BestScore")); 
-            PlayerPrefs.SetInt("BestScore", GameObject.Find("Score").GetComponent<Score>()._scoreNumber);
+            if (GameObject.Find("Score").GetComponent<Score>().ScoreNumber < PlayerPrefs.GetInt("BestScore")); 
+            PlayerPrefs.SetInt("BestScore", GameObject.Find("Score").GetComponent<Score>().ScoreNumber);
             Debug.Log(PlayerPrefs.GetInt("BestScore"));
           
             yield break;
@@ -91,7 +87,7 @@ public class PlayerAttack : MonoBehaviour
     private void Update()
     {
         //lifebar
-        var Health = 4 - _deathNumber;
+        var Health = 4 - DeathNumber;
         _healthImage.sizeDelta = new Vector2(Health * 100, 100);
         //Debug.Log( "Health"+ Health);
         
@@ -114,7 +110,7 @@ public class PlayerAttack : MonoBehaviour
         {
             if (IsDying == false)
             {
-               if (Damage[i].GetComponent<EnemyTestSuperior>() != null)
+               if (Damage[i].GetComponent<Penguins>() != null)
                { 
                    _killEffect.transform.position = _attackPos.position;
                    _killEffect.Play();
@@ -122,9 +118,9 @@ public class PlayerAttack : MonoBehaviour
                    _rb.AddForce(_kbStrength * Vector2.up);
                    Debug.Log(Damage[i].transform.name);
                                            
-                   Damage[i].GetComponent<EnemyTestSuperior>().Death = true;
+                   Damage[i].GetComponent<Penguins>().Death = true;
                } 
-               if (Damage[i].GetComponent<Pterodactyl>() != null)
+               if (Damage[i].GetComponent<Bird>() != null)
                {
                    _killEffect.transform.position = _attackPos.position;
                    _killEffect.Play();
@@ -132,7 +128,7 @@ public class PlayerAttack : MonoBehaviour
                    _rb.AddForce(_kbStrength * Vector2.up);
                    Debug.Log(Damage[i].transform.name);
                                            
-                   Damage[i].GetComponent<Pterodactyl>()._death = true;
+                   Damage[i].GetComponent<Bird>().Death = true;
                }
             }
         }

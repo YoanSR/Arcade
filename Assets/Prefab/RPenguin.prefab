@@ -240,14 +240,14 @@ MonoBehaviour:
   _collider: {fileID: 0}
   _rb: {fileID: 0}
   _sr: {fileID: 0}
-  target: {fileID: 222741016791628026, guid: 61168fd3186231245975eff2aca31da4, type: 3}
+  Target: {fileID: 0}
   _side: {fileID: 4217702102609514732}
   _sideRadius: {x: 0.5, y: 0.8}
   _otherLayer:
     serializedVersion: 2
     m_Bits: 4176
-  _speed: 4
-  _jumpStrength: 150
+  Speed: 3
+  JumpStrength: 175
   Death: 0
   _groundCheck: {fileID: 1786319532279241187}
   _groundRadius: 0.38

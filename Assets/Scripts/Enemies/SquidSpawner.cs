@@ -2,18 +2,18 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class Monster : MonoBehaviour
+public class SquidSpawner : MonoBehaviour
 {
-
     private Rigidbody2D _rb;
+    [SerializeField] private Squid _squid;
+    
     [SerializeField] private Transform _side;
     [SerializeField] private Vector2 _sideRadius;
     [SerializeField] private LayerMask _otherLayer;
+    
     [SerializeField] private int _speed;
-
-    [SerializeField] private Monster2 _monster2;
-
-    public GameObject _invocator;
+    
+    public GameObject Invocator;
     
     private void Start()
     {
@@ -37,7 +37,7 @@ public class Monster : MonoBehaviour
             var Target = _monster2._otherGameObject.position;
             transform.position = Target - new Vector3(0, 2, 0);
         }*/
-        transform.position = _invocator.transform.position;
+        transform.position = Invocator.transform.position;
         //_rb.velocity = Vector2.zero;
         
         //transform.position = _invocator.transform.position - new Vector3(0, 2, 0);
@@ -46,17 +46,17 @@ public class Monster : MonoBehaviour
     private IEnumerator Grab()
     {
         yield return new WaitForSeconds(0.6f);
-        while (true && _invocator != null)
+        while (true && Invocator != null)
         {
             //Debug.Log("Grabbed");
             //_rb.linearVelocityY = -3;
             //_invocator.GetComponent<Rigidbody2D>().linearVelocityY =-3;
             
             _rb.AddForceY(-100);
-            if (_invocator.tag == "Player")
-                _invocator.GetComponent<Rigidbody2D>().AddForceY(-100);
+            if (Invocator.tag == "Player")
+                Invocator.GetComponent<Rigidbody2D>().AddForceY(-100);
             else
-                _invocator.GetComponent<Rigidbody2D>().AddForceY(-25);
+                Invocator.GetComponent<Rigidbody2D>().AddForceY(-25);
             
             yield return new WaitForSeconds(0.15f);
         }
@@ -71,8 +71,7 @@ public class Monster : MonoBehaviour
         
         Destroy(gameObject);
     }
-
-    // Update is called once per frame
+    
     /*void Update()
     {
         Collider2D[] Damaged = Physics2D.OverlapBoxAll(_side.position, _sideRadius, 0,_otherLayer);
@@ -123,7 +122,7 @@ public class Monster : MonoBehaviour
     
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (_invocator != null)
+        if (Invocator != null)
             StartCoroutine(DeathMonster());
     }
 

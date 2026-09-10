@@ -1,16 +1,15 @@
-using System;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class DeathMenu : MonoBehaviour
 {
+    private Sequence _seq;
+    
     [SerializeField] private string _gameSceneName;
     [SerializeField] private string _MainMenuSceneName;
 
     [SerializeField] private Transform _transition;
-    
-    private Sequence _seq;
 
     private void Start()
     {

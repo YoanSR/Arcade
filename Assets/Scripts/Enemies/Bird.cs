@@ -5,14 +5,15 @@ using UnityEngine;
 using DG.Tweening;
 using Sequence = DG.Tweening.Sequence;
 
-public class Pterodactyl : MonoBehaviour
+public class Bird : MonoBehaviour
 {
     private Rigidbody2D _rb;
     private Animator _animator;
-
-    [SerializeField] private Transform _playerPos;
-     private bool _facingRight = true;
+    private Sequence _seq;
     
+    private bool _facingRight = true;
+    
+    [SerializeField] private Transform _playerPos;
     [SerializeField] private float _speed;
     [SerializeField] private float _dashStrength;
     
@@ -21,16 +22,12 @@ public class Pterodactyl : MonoBehaviour
 
     [SerializeField] private GameObject _scoreGameObject;
     [SerializeField] private int _scoreNumberAdd;
-    private int scoreAdded;
-    public bool _death;
+    private int _scoreAdded;
+    public bool Death;
     
     private bool _isDashing;
-
-    private Sequence _seq;
     
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
         _animator = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody2D>();
@@ -39,11 +36,10 @@ public class Pterodactyl : MonoBehaviour
         
         _playerPos = GameObject.Find("Player").transform;
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    private void Update()
     {
-        if (_death)
+        if (Death)
             StartCoroutine(MobDeath());
         
         if (!_isDashing) 
@@ -107,15 +103,15 @@ public class Pterodactyl : MonoBehaviour
     public IEnumerator MobDeath()
     {
         
-        while (scoreAdded < _scoreNumberAdd)
+        while (_scoreAdded < _scoreNumberAdd)
         {
             _scoreGameObject = GameObject.Find("Score");
-            scoreAdded++;
-            _scoreGameObject.GetComponent<Score>()._scoreNumber++;
+            _scoreAdded++;
+            _scoreGameObject.GetComponent<Score>().ScoreNumber++;
             yield return new WaitForSeconds(0.1f);
         }
 
-        if (scoreAdded == _scoreNumberAdd)
+        if (_scoreAdded == _scoreNumberAdd)
         {
             if (_soundPlayed == false)
             {

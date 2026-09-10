@@ -1,17 +1,14 @@
-using System;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
-using UnityEngine.Timeline;
 using UnityEngine.UI;
 
 public class Settings : MonoBehaviour
 {
-    [SerializeField] private Image _opacity;
-
     private float _firstPos;
 
+    [SerializeField] private Image _opacity;
     [SerializeField] private Transform _childScale;
     
     [SerializeField] AudioMixer _masterMixer;
@@ -21,7 +18,6 @@ public class Settings : MonoBehaviour
     [SerializeField] private Slider _SFXVolumeSlider;
     
     [HideInInspector] public bool _isActive;
-
     [HideInInspector] public bool _isPlaying;
     
     

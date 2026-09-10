@@ -4,12 +4,12 @@ public class Score : MonoBehaviour
 {
     private TMPro.TextMeshProUGUI _score;
 
-    public int _scoreNumber;
+    public int ScoreNumber;
 
     [SerializeField] private int _totalScoreNumber;
-    private int life;
+    private int _life;
 
-    [SerializeField] private GameObject _Player;
+    [SerializeField] private GameObject _player;
 
     private void Start()
     {
@@ -19,19 +19,19 @@ public class Score : MonoBehaviour
             //_scoreNumber = PlayerPrefs.GetInt("BestScore");
     }
 
-    // Update is called once per frame
+
     private void Update()
     {
         
-         _totalScoreNumber = _scoreNumber - 10000*life;
+         _totalScoreNumber = ScoreNumber - 10000*_life;
          
          if (_totalScoreNumber >= 10000)
          {
-             _Player.GetComponent<PlayerAttack>()._deathNumber--;
-             life++;
+             _player.GetComponent<PlayerAttack>().DeathNumber--;
+             _life++;
          }
              
-         _score.text = "" + _scoreNumber;
+         _score.text = "" + ScoreNumber;
 
 
        
